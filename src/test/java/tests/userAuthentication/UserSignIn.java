@@ -2,14 +2,16 @@ package tests.userAuthentication;
 
 import helpers.Configuration;
 import helpers.Driver;
-import helpers.enums.ErrorMessageEnums;
+import helpers.enums.AlertEnums;
 import helpers.enums.PageTitleEnums;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.SuiteRunner;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.AuthenticationPage;
+import pages.ForgotPasswordPage;
 import pages.Header;
 
 public class UserSignIn {
@@ -17,6 +19,7 @@ public class UserSignIn {
     private Header header;
     private AuthenticationPage authenticationPage;
     private Configuration configuration;
+    private ForgotPasswordPage forgotPasswordPage;
 
     @BeforeClass
     public void setUp() {
@@ -24,6 +27,7 @@ public class UserSignIn {
         driver.get(Configuration.getConfiguration().getSiteURL());
         header = new Header(driver);
         authenticationPage = new AuthenticationPage(driver);
+        forgotPasswordPage = new ForgotPasswordPage(driver);
     }
 
     @Test
@@ -54,27 +58,90 @@ public class UserSignIn {
     }
 
     @Test
-    public void incorrectSignIn_IncorrectEmailAddress() {
+    public void incorrectSignIn_incorrectEmailAddress() {
         header.clickSignInButton();
 
-        String invalidEmail = "invalid";
+        String incorrectEmail = "invalid";
         String password = header.generateRandomPassword();
-        authenticationPage.signIn(invalidEmail, password);
+        authenticationPage.signIn(incorrectEmail, password);
 
-        String error = authenticationPage.getMessageError();
-        Assert.assertEquals(error, ErrorMessageEnums.ErrorEnums.INVALID_EMAIL_ADDRESS.getErrorMessage());
+        String error = authenticationPage.getAlertMessage();
+        Assert.assertEquals(error, AlertEnums.AlertMessageEnums.INVALID_EMAIL_ADDRESS_ERROR.getAlertMessage());
     }
 
     @Test
-    public void incorrectSignIn_IncorrectPassword() {
+    public void incorrectSignIn_incorrectPassword() {
         header.clickSignInButton();
 
         String email = header.generateRandomEmail();
-        String invalidPassword = "pass";
-        authenticationPage.signIn(email, invalidPassword);
+        String incorrectPassword = "pass";
+        authenticationPage.signIn(email, incorrectPassword);
 
-        String error = authenticationPage.getMessageError();
-        Assert.assertEquals(error, ErrorMessageEnums.ErrorEnums.INVALID_PASSWORD.getErrorMessage());
+        String error = authenticationPage.getAlertMessage();
+        Assert.assertEquals(error, AlertEnums.AlertMessageEnums.INVALID_PASSWORD_ERROR.getAlertMessage());
+    }
+
+    @Test
+    public void incorrectSignIn_incorrectEmailAddressAndPassword_authenticationFailed() {
+        header.clickSignInButton();
+
+        String incorrectEmail = authenticationPage.generateRandomEmail();
+        String incorrectPassword = authenticationPage.generateRandomPassword();
+        authenticationPage.signIn(incorrectEmail, incorrectPassword);
+
+        String error = authenticationPage.getAlertMessage();
+        Assert.assertEquals(error, AlertEnums.AlertMessageEnums.AUTHENTICATION_FAILED_ERROR.getAlertMessage());
+    }
+
+    @Test
+    public void incorrectSignIn_missingEmailAddress() {
+        header.clickSignInButton();
+
+        String email = "";
+        String password = authenticationPage.generateRandomPassword();
+        authenticationPage.signIn(email, password);
+
+        String error = authenticationPage.getAlertMessage();
+        Assert.assertEquals(error, AlertEnums.AlertMessageEnums.EMAIL_ADDRESS_REQUIRED_ERROR.getAlertMessage());
+    }
+
+    @Test
+    public void incorrectSignIn_missingEmailAddressAndPassword() {
+        header.clickSignInButton();
+
+        String email = "";
+        String password = "";
+        authenticationPage.signIn(email, password);
+
+        String error = authenticationPage.getAlertMessage();
+        Assert.assertEquals(error, AlertEnums.AlertMessageEnums.EMAIL_ADDRESS_REQUIRED_ERROR.getAlertMessage());
+    }
+
+    @Test
+    public void incorrectSignIn_MissingPassword() {
+        header.clickSignInButton();
+
+        String email = authenticationPage.generateRandomEmail();
+        String password = "";
+        authenticationPage.signIn(email, password);
+
+        String error = authenticationPage.getAlertMessage();
+        Assert.assertEquals(error, AlertEnums.AlertMessageEnums.PASSWORD_REQUIRED_ERROR.getAlertMessage());
+    }
+
+    @Test
+    public void forgotPassword_correctEmailAddress() {
+        header.clickSignInButton();
+
+        String email = Configuration.getConfiguration().getEmail();
+        authenticationPage.forgotPasswordLinkClick();
+        forgotPasswordPage.inputEmailAddress(email);
+        forgotPasswordPage.retrievePasswordButtonClick();
+
+        String confirmationFromPage = forgotPasswordPage.getAlertMessage();
+        String confirmation = AlertEnums.AlertMessageEnums.FORGOT_PASSWORD_CONFIRMATION.getAlertMessage();
+        String confirmationEmail = confirmation + email;
+        Assert.assertEquals(confirmationFromPage, confirmationEmail);
     }
 
 

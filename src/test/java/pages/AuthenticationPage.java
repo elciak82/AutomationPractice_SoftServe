@@ -21,7 +21,10 @@ public class AuthenticationPage extends GenericPage {
     WebElement signInButton;
 
     @FindBy (css = "[class = 'alert alert-danger'] li")
-    WebElement error;
+    WebElement alert;
+
+    @FindBy (css = "[title='Recover your forgotten password']")
+    WebElement forgotPasswordLink;
 
     public void inputEmailAddress(String email) {
         emailAddress.clear();
@@ -43,8 +46,12 @@ public class AuthenticationPage extends GenericPage {
         signInButtonClick();
     }
 
-    public String getMessageError (){
-        return error.getText();
+    public String getAlertMessage(){
+        return alert.getText();
+    }
+
+    public void forgotPasswordLinkClick() {
+        forgotPasswordLink.click();
     }
 
 }
