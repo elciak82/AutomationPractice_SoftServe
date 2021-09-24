@@ -8,7 +8,8 @@ public class AlertEnums {
         INVALID_PASSWORD_ERROR("Invalid password."),
         PASSWORD_REQUIRED_ERROR("Password is required."),
         AUTHENTICATION_FAILED_ERROR("Authentication failed."),
-        FORGOT_PASSWORD_CONFIRMATION("A confirmation email has been sent to your address: ");
+        FORGOT_PASSWORD_CONFIRMATION("A confirmation email has been sent to your address: "),
+        NO_ACCOUNT_REGISTER_ERROR("There is no account registered for this email address.");
 
         private final String alertMessage;
 

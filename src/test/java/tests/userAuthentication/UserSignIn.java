@@ -6,10 +6,7 @@ import helpers.enums.AlertEnums;
 import helpers.enums.PageTitleEnums;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.SuiteRunner;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.AuthenticationPage;
 import pages.ForgotPasswordPage;
 import pages.Header;
@@ -21,7 +18,7 @@ public class UserSignIn {
     private Configuration configuration;
     private ForgotPasswordPage forgotPasswordPage;
 
-    @BeforeClass
+    @BeforeMethod
     public void setUp() {
         driver = Driver.initializeWebDriver();
         driver.get(Configuration.getConfiguration().getSiteURL());
@@ -138,15 +135,28 @@ public class UserSignIn {
         forgotPasswordPage.inputEmailAddress(email);
         forgotPasswordPage.retrievePasswordButtonClick();
 
-        String confirmationFromPage = forgotPasswordPage.getAlertMessage();
+        String confirmationFromPage = forgotPasswordPage.getConfirmationMessage();
         String confirmation = AlertEnums.AlertMessageEnums.FORGOT_PASSWORD_CONFIRMATION.getAlertMessage();
         String confirmationEmail = confirmation + email;
         Assert.assertEquals(confirmationFromPage, confirmationEmail);
     }
 
+    @Test
+    public void forgotPassword_incorrectEmailAddress() {
+        header.clickSignInButton();
 
-    @AfterClass
+        String incorrectEmail = authenticationPage.generateRandomEmail();
+        authenticationPage.forgotPasswordLinkClick();
+        forgotPasswordPage.inputEmailAddress(incorrectEmail);
+        forgotPasswordPage.retrievePasswordButtonClick();
+
+        String error = forgotPasswordPage.getErrorMessage();
+        Assert.assertEquals(error, AlertEnums.AlertMessageEnums.NO_ACCOUNT_REGISTER_ERROR.getAlertMessage());
+    }
+
+
+    @AfterMethod
     public void tearDown() {
-        driver.quit();
+        driver.close();
     }
 }
