@@ -2,7 +2,8 @@ package tests.pagesCheck;
 
 import helpers.Configuration;
 import helpers.Driver;
-import pages.HomePage;
+import helpers.enums.PageTitleEnums;
+import pages.Header;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -11,20 +12,20 @@ import org.testng.annotations.Test;
 
 public class ContactsUsPageTests {
     private WebDriver driver;
-    private HomePage homePage;
+    private Header header;
 
     @BeforeMethod
     public void setUp() {
         driver = Driver.initializeWebDriver();
         driver.get(Configuration.getConfiguration().getSiteURL());
-        homePage = new HomePage(driver);
+        header = new Header(driver);
     }
 
     @Test
     public void verifyContactUsPageTitleTest() {
-        homePage.clickContactUsButton();
-        String title = homePage.getPageTitle();
-        Assert.assertEquals(title, "Contact us - My Store");
+        header.clickContactUsButton();
+        String title = header.getPageTitle();
+        Assert.assertEquals(title, PageTitleEnums.TitlesEnums.CONTACT_US_PAGE.getPageTitle());
     }
 
     @AfterMethod

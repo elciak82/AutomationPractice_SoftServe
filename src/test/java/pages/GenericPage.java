@@ -34,12 +34,12 @@ public class GenericPage {
         return builder.toString();
     }
 
-    public String generateRandomEmail(){
+    public String generateRandomEmail() {
         String name = randomAlphaNumeric(6);
         return name + "@email.pl";
     }
 
-    public String generateRandomPassword(){
+    public String generateRandomPassword() {
         return randomAlphaNumeric(6);
     }
 

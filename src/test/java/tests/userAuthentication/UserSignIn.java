@@ -2,17 +2,18 @@ package tests.userAuthentication;
 
 import helpers.Configuration;
 import helpers.Driver;
+import helpers.enums.PageTitleEnums;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.AuthenticationPage;
-import pages.HomePage;
+import pages.Header;
 
 public class UserSignIn {
     private WebDriver driver;
-    private HomePage homePage;
+    private Header header;
     private AuthenticationPage authenticationPage;
     private Configuration configuration;
 
@@ -20,21 +21,35 @@ public class UserSignIn {
     public void setUp(){
         driver = Driver.initializeWebDriver();
         driver.get(Configuration.getConfiguration().getSiteURL());
-        homePage = new HomePage(driver);
+        header = new Header(driver);
+        authenticationPage = new AuthenticationPage(driver);
     }
 
     @Test
     public void correctSignIn(){
-        homePage.clickSignInButton();
+        header.clickSignInButton();
 
-        String email = configuration.getEmail();
-        String password = configuration.getPassword();
+        String email = Configuration.getConfiguration().getEmail();
+        String password = Configuration.getConfiguration().getPassword();
         authenticationPage.inputEmailAddress(email);
-        authenticationPage.inputEmailAddress(password);
+        authenticationPage.inputPassword(password);
         authenticationPage.signInButtonClick();
 
         String title = authenticationPage.getPageTitle();
-        Assert.assertEquals(title, "My account - My Store");
+        Assert.assertEquals(title, PageTitleEnums.TitlesEnums.MY_ACCOUNT_PAGE.getPageTitle());
+    }
+
+    @Test
+    public void correctSignOut(){
+        header.clickSignInButton();
+
+        String email = Configuration.getConfiguration().getEmail();
+        String password = Configuration.getConfiguration().getPassword();
+        authenticationPage.signIn(email,password);
+
+        header.clickSignOutButton();
+        String title = authenticationPage.getPageTitle();
+        Assert.assertEquals(title, PageTitleEnums.TitlesEnums.AUTHENTICATION_PAGE.getPageTitle());
     }
 
     @AfterClass

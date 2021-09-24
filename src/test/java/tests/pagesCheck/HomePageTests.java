@@ -2,26 +2,27 @@ package tests.pagesCheck;
 
 import helpers.Configuration;
 import helpers.Driver;
+import helpers.enums.PageTitleEnums;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import pages.HomePage;
+import pages.Header;
 
 public class HomePageTests {
     private WebDriver driver;
-    private HomePage homePage;
+    private Header header;
 
     @BeforeClass
     public void setUp(){
         driver = Driver.initializeWebDriver();
         driver.get(Configuration.getConfiguration().getSiteURL());
-        homePage = new HomePage(driver);
+        header = new Header(driver);
     }
 
     @Test
     public void verifyHomePageTitleTest(){
-        String title = homePage.getPageTitle();
-        Assert.assertEquals(title, "My Store");
+        String title = header.getPageTitle();
+        Assert.assertEquals(title, PageTitleEnums.TitlesEnums.HOME_PAGE.getPageTitle());
     }
 
     @AfterClass

@@ -34,4 +34,10 @@ public class AuthenticationPage extends GenericPage {
         signInButton.click();
     }
 
+    public void signIn(String email, String password){
+        inputEmailAddress(email);
+        inputPassword(password);
+        signInButtonClick();
+    }
+
 }

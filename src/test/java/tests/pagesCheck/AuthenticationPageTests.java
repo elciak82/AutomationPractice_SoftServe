@@ -3,27 +3,29 @@ package tests.pagesCheck;
 import helpers.Driver;
 import helpers.Configuration;
 
-import pages.HomePage;
+import helpers.enums.PageTitleEnums;
+import pages.Header;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
 public class AuthenticationPageTests {
     private WebDriver driver;
-    private HomePage homePage;
+    private Header header;
 
     @BeforeTest
     public void setUp() {
         driver = Driver.initializeWebDriver();
         driver.get(Configuration.getConfiguration().getSiteURL());
-        homePage = new HomePage(driver);
+        header = new Header(driver);
+        new PageTitleEnums();
     }
 
     @Test
     public void verifyAuthenticationPageTitleTest() {
-        homePage.clickSignInButton();
-        String title = homePage.getPageTitle();
-        Assert.assertEquals(title, "Login - My Store");
+        header.clickSignInButton();
+        String title = header.getPageTitle();
+        Assert.assertEquals(title, PageTitleEnums.TitlesEnums.AUTHENTICATION_PAGE.getPageTitle());
     }
 
     @AfterTest

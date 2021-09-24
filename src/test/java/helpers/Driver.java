@@ -10,7 +10,7 @@ public class Driver {
     public static WebDriver initializeWebDriver() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
-        options.addArguments("--headless");
+//        options.addArguments("--headless");
         System.setProperty("webdriver.chrome.driver", getConfiguration().getDriverLocation());
         return new ChromeDriver(options);
     }
