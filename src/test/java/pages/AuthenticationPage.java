@@ -20,6 +20,9 @@ public class AuthenticationPage extends GenericPage {
     @FindBy(id = "SubmitLogin")
     WebElement signInButton;
 
+    @FindBy (css = "[class = 'alert alert-danger'] li")
+    WebElement error;
+
     public void inputEmailAddress(String email) {
         emailAddress.clear();
         emailAddress.sendKeys(email);
@@ -38,6 +41,10 @@ public class AuthenticationPage extends GenericPage {
         inputEmailAddress(email);
         inputPassword(password);
         signInButtonClick();
+    }
+
+    public String getMessageError (){
+        return error.getText();
     }
 
 }
