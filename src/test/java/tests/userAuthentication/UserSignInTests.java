@@ -11,7 +11,7 @@ import pages.AuthenticationPage;
 import pages.ForgotPasswordPage;
 import pages.Header;
 
-public class UserSignIn {
+public class UserSignInTests {
     private WebDriver driver;
     private Header header;
     private AuthenticationPage authenticationPage;

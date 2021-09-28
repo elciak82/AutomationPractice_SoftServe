@@ -20,11 +20,18 @@ public class AuthenticationPage extends GenericPage {
     @FindBy(id = "SubmitLogin")
     WebElement signInButton;
 
-    @FindBy (css = "[class = 'alert alert-danger'] li")
+    @FindBy(css = "[class = 'alert alert-danger'] li")
     WebElement alert;
 
-    @FindBy (css = "[title='Recover your forgotten password']")
+    @FindBy(id = "[title='Recover your forgotten password']")
     WebElement forgotPasswordLink;
+
+    @FindBy(id = "email_create")
+    WebElement emailCreate;
+
+    @FindBy (id = "SubmitCreate")
+    WebElement createAnAccountButton;
+
 
     public void inputEmailAddress(String email) {
         emailAddress.clear();
@@ -40,18 +47,28 @@ public class AuthenticationPage extends GenericPage {
         signInButton.click();
     }
 
-    public void signIn(String email, String password){
+    public void signIn(String email, String password) {
         inputEmailAddress(email);
         inputPassword(password);
         signInButtonClick();
     }
 
-    public String getAlertMessage(){
+    public String getAlertMessage() {
         return alert.getText();
     }
 
     public void forgotPasswordLinkClick() {
         forgotPasswordLink.click();
+    }
+
+    public void inputEmailAddressCreate(String newEmail) {
+        emailCreate.clear();
+        emailCreate.sendKeys(newEmail);
+    }
+
+    public void createAnAccountButtonClick(){
+        createAnAccountButton.click();
+
     }
 
 }
