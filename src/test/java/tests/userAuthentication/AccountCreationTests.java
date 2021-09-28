@@ -2,16 +2,13 @@ package tests.userAuthentication;
 
 import helpers.Configuration;
 import helpers.Driver;
-import helpers.enums.AlertEnums;
-import helpers.enums.PageTitleEnums;
 import helpers.models.Form;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.AuthenticationPage;
-import pages.ForgotPasswordPage;
+import pages.CreateAnAccountPage;
 import pages.Header;
 
 public class AccountCreationTests {
@@ -20,7 +17,7 @@ public class AccountCreationTests {
     private Header header;
     private AuthenticationPage authenticationPage;
     private Configuration configuration;
-    private ForgotPasswordPage forgotPasswordPage;
+    private CreateAnAccountPage createAnAccountPage;
 
     @BeforeMethod
     public void setUp() {
@@ -28,7 +25,7 @@ public class AccountCreationTests {
         driver.get(Configuration.getConfiguration().getSiteURL());
         header = new Header(driver);
         authenticationPage = new AuthenticationPage(driver);
-        forgotPasswordPage = new ForgotPasswordPage(driver);
+        createAnAccountPage = new CreateAnAccountPage(driver);
     }
 
     @Test
@@ -38,6 +35,15 @@ public class AccountCreationTests {
         String email = authenticationPage.generateRandomEmail();
         authenticationPage.inputEmailAddressCreate(email);
         authenticationPage.createAnAccountButtonClick();
+//        createAnAccountPage.submitAccountClick();
+
+        Form userForm = Form.builder()
+                .customerFirstName("FirstName")
+                .customerLastName("LastName")
+                .build();
+
+//        System.out.println(userForm.builder().getCustomerFirstName());
+        createAnAccountPage.createAnAccountRequired(userForm);
 
     }
 

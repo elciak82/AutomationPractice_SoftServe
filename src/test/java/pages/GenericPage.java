@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,6 +16,7 @@ public class GenericPage {
 
     GenericPage(WebDriver driver) {
         this.driver = driver;
+//        documentReady();
     }
 
     public void fluentWaitForElementDisplayed(WebElement elementToBeDisplayed) {
@@ -23,6 +25,15 @@ public class GenericPage {
                 .pollingEvery(Duration.ofMillis(500))
                 .ignoring(NoSuchElementException.class)
                 .until(WebElement::isDisplayed);
+    }
+
+    public void documentReady() {
+        boolean readyStateComplete = false;
+        while (!readyStateComplete) {
+            JavascriptExecutor executor = (JavascriptExecutor) driver;
+            executor.executeScript("window.scrollTo(0, document.body.offsetHeight)");
+            readyStateComplete = executor.executeScript("return document.readyState").equals("complete");
+        }
     }
 
     public String randomAlphaNumeric(int count) {

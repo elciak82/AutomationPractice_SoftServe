@@ -2,35 +2,38 @@ package helpers.models;
 
 public class Form {
 
-    private String firstName;
-    private String lastName;
+    private String customerFirstName;
+    private String customerLastName;
+
+    private Form() {
+    }
 
     public static final class Builder {
-        private String firstName;
-        private String lastName;
+        private String customerFirstName;
+        private String customerLastName;
 
 
-        public Builder firstName(String firstName) {
-            this.firstName = firstName;
+        public Builder customerFirstName(String customerFirstName) {
+            this.customerFirstName = customerFirstName;
             return this;
         }
 
-        public Builder lastName(String lastName) {
-            this.lastName = lastName;
+        public Builder customerLastName(String customerLastName) {
+            this.customerLastName = customerLastName;
             return this;
         }
 
         public Form build() {
-            if (firstName.isEmpty()) {
+            if (customerFirstName.isEmpty()) {
                 throw new IllegalStateException("First name cannot be empty");
             }
-            if (lastName.isEmpty()) {
+            if (customerLastName.isEmpty()) {
                 throw new IllegalStateException("Last name cannot be empty");
             }
 
             Form form = new Form();
-            form.firstName = this.firstName;
-            form.lastName = this.lastName;
+            form.customerFirstName = this.customerFirstName;
+            form.customerLastName = this.customerLastName;
             return form;
         }
     }
@@ -38,4 +41,11 @@ public class Form {
         return new Builder();
     }
 
+    public String getCustomerFirstName() {
+        return customerFirstName;
+    }
+
+    public String getCustomerLastName() {
+        return customerLastName;
+    }
 }

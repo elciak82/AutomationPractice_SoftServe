@@ -32,6 +32,9 @@ public class AuthenticationPage extends GenericPage {
     @FindBy (id = "SubmitCreate")
     WebElement createAnAccountButton;
 
+    @FindBy(css = "[id = 'submitAccount']")
+    WebElement submitAccount;
+
 
     public void inputEmailAddress(String email) {
         emailAddress.clear();
@@ -68,6 +71,7 @@ public class AuthenticationPage extends GenericPage {
 
     public void createAnAccountButtonClick(){
         createAnAccountButton.click();
+        fluentWaitForElementDisplayed(submitAccount);
 
     }
 
