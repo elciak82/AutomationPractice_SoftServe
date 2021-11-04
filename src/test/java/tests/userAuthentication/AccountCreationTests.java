@@ -37,9 +37,13 @@ public class AccountCreationTests {
         authenticationPage.createAnAccountButtonClick();
 //        createAnAccountPage.submitAccountClick();
 
+        String FirstName = authenticationPage.generateRandomUserFirstName();
+        String LastName = authenticationPage.generateRandomUserLastName();
+
         Form userForm = Form.builder()
                 .customerFirstName("FirstName")
                 .customerLastName("LastName")
+                .customerLastName("Pass")
                 .build();
 
 //        System.out.println(userForm.builder().getCustomerFirstName());

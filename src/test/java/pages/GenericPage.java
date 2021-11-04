@@ -45,13 +45,48 @@ public class GenericPage {
         return builder.toString();
     }
 
+    public String generateSuffix() {
+        return randomAlphaNumeric(6);
+    }
+
     public String generateRandomEmail() {
-        String name = randomAlphaNumeric(6);
-        return name + "@email.pl";
+        return "email@" + generateSuffix() + ".com";
     }
 
     public String generateRandomPassword() {
-        return randomAlphaNumeric(6);
+        return "pass_" + generateSuffix();
+    }
+
+    public String generateRandomUserFirstName() {
+        return "FirstName_" + generateSuffix();
+    }
+
+    public String generateRandomUserLastName() {
+        return "LastName_" + generateSuffix();
+    }
+
+    public String generateRandomACompany() {
+        return "Company_" + generateSuffix();
+    }
+
+    public String generateRandomAddress() {
+        return "Address_" + generateSuffix();
+    }
+
+    public String generateRandomAddressLine2() {
+        return "Address2_" + generateSuffix();
+    }
+
+    public String generateRandomCountry() {
+        return "Country" + generateSuffix();
+    }
+
+    public String generateRandomZipCode() {
+        return "12345";
+    }
+
+    public String generateRandomZPhoneNumber() {
+        return "123456789";
     }
 
     public String getPageTitle() {
