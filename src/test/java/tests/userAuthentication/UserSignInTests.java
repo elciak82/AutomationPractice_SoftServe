@@ -4,6 +4,7 @@ import helpers.Configuration;
 import helpers.Driver;
 import helpers.enums.AlertEnums;
 import helpers.enums.PageTitleEnums;
+import helpers.providers.CustomerFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -17,6 +18,7 @@ public class UserSignInTests {
     private AuthenticationPage authenticationPage;
     private Configuration configuration;
     private ForgotPasswordPage forgotPasswordPage;
+    private CustomerFactory customerFactory;
 
     @BeforeMethod
     public void setUp() {
@@ -60,7 +62,7 @@ public class UserSignInTests {
         header.clickSignInButton();
 
         String incorrectEmail = "invalid";
-        String password = header.generateRandomPassword();
+        String password = customerFactory.generateRandomPassword();
         authenticationPage.signIn(incorrectEmail, password);
 
         String error = authenticationPage.getAlertMessage();
@@ -71,7 +73,7 @@ public class UserSignInTests {
     public void incorrectSignIn_incorrectPassword() {
         header.clickSignInButton();
 
-        String email = header.generateRandomEmail();
+        String email = customerFactory.generateRandomEmail();
         String incorrectPassword = "pass";
         authenticationPage.signIn(email, incorrectPassword);
 
@@ -83,8 +85,8 @@ public class UserSignInTests {
     public void incorrectSignIn_incorrectEmailAddressAndPassword_authenticationFailed() {
         header.clickSignInButton();
 
-        String incorrectEmail = authenticationPage.generateRandomEmail();
-        String incorrectPassword = authenticationPage.generateRandomPassword();
+        String incorrectEmail = customerFactory.generateRandomEmail();
+        String incorrectPassword = customerFactory.generateRandomPassword();
         authenticationPage.signIn(incorrectEmail, incorrectPassword);
 
         String error = authenticationPage.getAlertMessage();
@@ -96,7 +98,7 @@ public class UserSignInTests {
         header.clickSignInButton();
 
         String email = "";
-        String password = authenticationPage.generateRandomPassword();
+        String password = customerFactory.generateRandomPassword();
         authenticationPage.signIn(email, password);
 
         String error = authenticationPage.getAlertMessage();
@@ -119,7 +121,7 @@ public class UserSignInTests {
     public void incorrectSignIn_MissingPassword() {
         header.clickSignInButton();
 
-        String email = authenticationPage.generateRandomEmail();
+        String email = customerFactory.generateRandomEmail();
         String password = "";
         authenticationPage.signIn(email, password);
 
@@ -132,8 +134,7 @@ public class UserSignInTests {
         header.clickSignInButton();
 
         String email = Configuration.getConfiguration().getEmail();
-        authenticationPage.forgotPasswordLinkClick();
-        forgotPasswordPage.inputEmailAddress(email);
+        authenticationPage.forgotPasswordLinkClick().inputEmailAddress(email); ////// HERE
         forgotPasswordPage.retrievePasswordButtonClick();
 
         String confirmationFromPage = forgotPasswordPage.getConfirmationMessage();
@@ -146,7 +147,7 @@ public class UserSignInTests {
     public void forgotPassword_incorrectEmailAddress() {
         header.clickSignInButton();
 
-        String incorrectEmail = authenticationPage.generateRandomEmail();
+        String incorrectEmail = customerFactory.generateRandomEmail();
         authenticationPage.forgotPasswordLinkClick();
         forgotPasswordPage.inputEmailAddress(incorrectEmail);
         forgotPasswordPage.retrievePasswordButtonClick();

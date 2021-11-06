@@ -1,6 +1,7 @@
 package pages;
 
-import helpers.models.Form;
+import helpers.enums.StatesEnums;
+import helpers.models.Customer;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -91,22 +92,22 @@ public class CreateAnAccountPage extends GenericPage {
     @FindBy(css = "[id = 'submitAccount']")
     WebElement submitAccount;
 
-    public void selectFromDropdown (WebElement webElement) {
+    public void selectFromDropdown (WebElement webElement, StatesEnums.CustomerStateEnums customerState) {
         Select dropdown = new Select(webElement);
-        dropdown.selectByIndex(1);
+        dropdown.selectByValue(String.valueOf(customerState.getState()));
     }
 
-    public void createAnAccountRequired(Form form) {
+    public void createAnAccountRequired(Customer customer, StatesEnums.CustomerStateEnums stateEnum) {
         customerLastName.isDisplayed();
-        customerFirstName.sendKeys(form.getCustomerFirstName());
-        customerLastName.sendKeys(form.getCustomerLastName());
-        password.sendKeys(form.getCustomerPassword());
-        addressLine1.sendKeys(form.getCustomerAddress());
-        city.sendKeys(form.getCustomerCity());
-        selectFromDropdown(state);
-        postcode.sendKeys(form.getCustomerZip());
-        mobilePhone.sendKeys(form.getCustomerMobilePhonePhone());
-        addressAlias.sendKeys(form.getCustomerAddressAlias());
+        customerFirstName.sendKeys(customer.getCustomerFirstName());
+        customerLastName.sendKeys(customer.getCustomerLastName());
+        password.sendKeys(customer.getCustomerPassword());
+        addressLine1.sendKeys(customer.getCustomerAddress());
+        city.sendKeys(customer.getCustomerCity());
+        selectFromDropdown(state, stateEnum);
+        postcode.sendKeys(customer.getCustomerZip());
+        mobilePhone.sendKeys(customer.getCustomerMobilePhonePhone());
+        addressAlias.sendKeys(customer.getCustomerAddressAlias());
         submitAccount.click();
     }
 

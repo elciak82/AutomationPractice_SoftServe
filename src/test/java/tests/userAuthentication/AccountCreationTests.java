@@ -3,7 +3,9 @@ package tests.userAuthentication;
 import helpers.Configuration;
 import helpers.Driver;
 import helpers.enums.PageTitleEnums;
-import helpers.models.Form;
+import helpers.enums.StatesEnums;
+import helpers.models.Customer;
+import helpers.providers.CustomerFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -26,41 +28,21 @@ public class AccountCreationTests {
         driver = Driver.initializeWebDriver();
         driver.get(Configuration.getConfiguration().getSiteURL());
         header = new Header(driver);
-        authenticationPage = new AuthenticationPage(driver);
-        createAnAccountPage = new CreateAnAccountPage(driver);
+        authenticationPage = new AuthenticationPage(driver); ////// HERE
+        createAnAccountPage = new CreateAnAccountPage(driver); ////// HERE
+
     }
 
     @Test
     public void correctAccountCreation_onlyRequiredFields() {
         header.clickSignInButton();
 
-        String email = authenticationPage.generateRandomEmail();
-        authenticationPage.inputEmailAddressCreate(email);
+        CustomerFactory customerFactory = new CustomerFactory();
+        String email = customerFactory.generateRandomEmail();
+
+        authenticationPage.inputEmailAddressCreate(email); ////// HERE
         authenticationPage.createAnAccountButtonClick();
-//        createAnAccountPage.submitAccountClick();
-
-        String firstName = authenticationPage.generateRandomUserFirstName();
-        String lastName = authenticationPage.generateRandomUserLastName();
-        String password = authenticationPage.generateRandomPassword();
-        String address = authenticationPage.generateRandomAddress();
-        String city = authenticationPage.generateRandomCity();
-        String zip = authenticationPage.generateRandomZip();
-        String mobilePhone = authenticationPage.generateRandomMobileNumber();
-        String addressAlias = authenticationPage.generateRandomAddressAlias();
-
-        Form userForm = Form.builder()
-                .customerFirstName(firstName)
-                .customerLastName(lastName)
-                .customerPassword(password)
-                .customerAddress(address)
-                .customerCity(city)
-                .customerZip(zip)
-                .customerMobilePhone(mobilePhone)
-                .customerAddressAlias(addressAlias)
-                .build();
-
-//        System.out.println(userForm.builder().getCustomerFirstName());
-        createAnAccountPage.createAnAccountRequired(userForm);
+        createAnAccountPage.createAnAccountRequired(customerFactory.getCustomerToRegister_Required(), StatesEnums.CustomerStateEnums.ALABAMA);
 
         String title = authenticationPage.getPageTitle();
         Assert.assertEquals(title, PageTitleEnums.TitlesEnums.MY_ACCOUNT_PAGE.getPageTitle());

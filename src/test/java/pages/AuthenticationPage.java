@@ -60,8 +60,9 @@ public class AuthenticationPage extends GenericPage {
         return alert.getText();
     }
 
-    public void forgotPasswordLinkClick() {
+    public ForgotPasswordPage forgotPasswordLinkClick() {
         forgotPasswordLink.click();
+        return new ForgotPasswordPage(driver); ////// HERE
     }
 
     public void inputEmailAddressCreate(String newEmail) {

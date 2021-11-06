@@ -1,8 +1,6 @@
 package helpers.models;
 
-import java.security.SecureRandom;
-
-public class Form {
+public class Customer {
 
     private String customerFirstName;
     private String customerLastName;
@@ -12,7 +10,6 @@ public class Form {
     private String customerAddress;
     private String customerAddress2;
     private String customerCity;
-    private String customerState;
     private String customerZip;
     private String customerAdditionalInfo;
     private String customerHomePhone;
@@ -20,7 +17,7 @@ public class Form {
     private String customerAddressAlias;
 
 
-    private Form() {
+    public Customer() {
     }
 
     public String getCustomerFirstName() {
@@ -55,8 +52,6 @@ public class Form {
         return customerCity;
     }
 
-    public String getCustomerState() { return customerState; }
-
     public String getCustomerZip() {
         return customerZip;
     }
@@ -86,7 +81,6 @@ public class Form {
         private String customerAddress;
         private String customerAddress2;
         private String customerCity;
-        private String customerState;
         private String customerZip;
         private String customerAdditionalInfo;
         private String customerHomePhone;
@@ -134,11 +128,6 @@ public class Form {
             return this;
         }
 
-        public Builder customerState(String customerState) {
-            this.customerState = customerState;
-            return this;
-        }
-
         public Builder customerZip(String customerZip) {
             this.customerZip = customerZip;
             return this;
@@ -164,7 +153,7 @@ public class Form {
             return this;
         }
 
-        public Form build() {
+        public Customer build() {
             if (customerFirstName.isEmpty()) {
                 throw new IllegalStateException("First name cannot be empty");
             }
@@ -172,22 +161,21 @@ public class Form {
                 throw new IllegalStateException("Last name cannot be empty");
             }
 
-            Form form = new Form();
-            form.customerFirstName = this.customerFirstName;
-            form.customerLastName = this.customerLastName;
-            form.customerPassword = this.customerPassword;
-            form.customerEmail = this.customerEmail;
-            form.customerCompany = this.customerCompany;
-            form.customerAddress = this.customerAddress;
-            form.customerAddress2 = this.customerAddress2;
-            form.customerCity = this.customerCity;
-            form.customerState = this.customerState;
-            form.customerZip = this.customerZip;
-            form.customerAdditionalInfo = this.customerAdditionalInfo;
-            form.customerHomePhone = this.customerHomePhone;
-            form.customerMobilePhone = this.customerMobilePhone;
-            form.customerAddressAlias = this.customerAddressAlias;
-            return form;
+            Customer customer = new Customer();
+            customer.customerFirstName = this.customerFirstName;
+            customer.customerLastName = this.customerLastName;
+            customer.customerPassword = this.customerPassword;
+            customer.customerEmail = this.customerEmail;
+            customer.customerCompany = this.customerCompany;
+            customer.customerAddress = this.customerAddress;
+            customer.customerAddress2 = this.customerAddress2;
+            customer.customerCity = this.customerCity;
+            customer.customerZip = this.customerZip;
+            customer.customerAdditionalInfo = this.customerAdditionalInfo;
+            customer.customerHomePhone = this.customerHomePhone;
+            customer.customerMobilePhone = this.customerMobilePhone;
+            customer.customerAddressAlias = this.customerAddressAlias;
+            return customer;
         }
     }
 
