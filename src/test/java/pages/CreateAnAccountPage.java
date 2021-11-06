@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 public class CreateAnAccountPage extends GenericPage {
     public CreateAnAccountPage(WebDriver driver) {
@@ -63,6 +64,9 @@ public class CreateAnAccountPage extends GenericPage {
     @FindBy(id = "city")
     WebElement city;
 
+    @FindBy(id = "uniform-id_state")
+    WebElement getState;
+
     @FindBy(id = "id_state")
     WebElement state;
 
@@ -87,11 +91,22 @@ public class CreateAnAccountPage extends GenericPage {
     @FindBy(css = "[id = 'submitAccount']")
     WebElement submitAccount;
 
+    public void selectFromDropdown (WebElement webElement) {
+        Select dropdown = new Select(webElement);
+        dropdown.selectByIndex(1);
+    }
+
     public void createAnAccountRequired(Form form) {
         customerLastName.isDisplayed();
         customerFirstName.sendKeys(form.getCustomerFirstName());
         customerLastName.sendKeys(form.getCustomerLastName());
-//        password.sendKeys();
+        password.sendKeys(form.getCustomerPassword());
+        addressLine1.sendKeys(form.getCustomerAddress());
+        city.sendKeys(form.getCustomerCity());
+        selectFromDropdown(state);
+        postcode.sendKeys(form.getCustomerZip());
+        mobilePhone.sendKeys(form.getCustomerMobilePhonePhone());
+        addressAlias.sendKeys(form.getCustomerAddressAlias());
         submitAccount.click();
     }
 

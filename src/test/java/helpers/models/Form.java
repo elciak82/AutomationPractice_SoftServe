@@ -1,5 +1,7 @@
 package helpers.models;
 
+import java.security.SecureRandom;
+
 public class Form {
 
     private String customerFirstName;
@@ -10,6 +12,7 @@ public class Form {
     private String customerAddress;
     private String customerAddress2;
     private String customerCity;
+    private String customerState;
     private String customerZip;
     private String customerAdditionalInfo;
     private String customerHomePhone;
@@ -52,6 +55,8 @@ public class Form {
         return customerCity;
     }
 
+    public String getCustomerState() { return customerState; }
+
     public String getCustomerZip() {
         return customerZip;
     }
@@ -81,6 +86,7 @@ public class Form {
         private String customerAddress;
         private String customerAddress2;
         private String customerCity;
+        private String customerState;
         private String customerZip;
         private String customerAdditionalInfo;
         private String customerHomePhone;
@@ -124,7 +130,12 @@ public class Form {
         }
 
         public Builder customerCity(String customerCity) {
-            this.customerCity= customerCity;
+            this.customerCity = customerCity;
+            return this;
+        }
+
+        public Builder customerState(String customerState) {
+            this.customerState = customerState;
             return this;
         }
 
@@ -139,7 +150,7 @@ public class Form {
         }
 
         public Builder customerHomePhone(String customerHomePhone) {
-            this.customerHomePhone= customerHomePhone;
+            this.customerHomePhone = customerHomePhone;
             return this;
         }
 
@@ -164,16 +175,17 @@ public class Form {
             Form form = new Form();
             form.customerFirstName = this.customerFirstName;
             form.customerLastName = this.customerLastName;
-            form.customerPassword= this.customerPassword;
-            form.customerEmail= this.customerEmail;
+            form.customerPassword = this.customerPassword;
+            form.customerEmail = this.customerEmail;
             form.customerCompany = this.customerCompany;
             form.customerAddress = this.customerAddress;
-            form.customerAddress2= this.customerAddress2;
-            form.customerCity= this.customerCity;
-            form.customerZip= this.customerZip;
+            form.customerAddress2 = this.customerAddress2;
+            form.customerCity = this.customerCity;
+            form.customerState = this.customerState;
+            form.customerZip = this.customerZip;
             form.customerAdditionalInfo = this.customerAdditionalInfo;
-            form.customerHomePhone= this.customerHomePhone;
-            form.customerMobilePhone= this.customerMobilePhone;
+            form.customerHomePhone = this.customerHomePhone;
+            form.customerMobilePhone = this.customerMobilePhone;
             form.customerAddressAlias = this.customerAddressAlias;
             return form;
         }

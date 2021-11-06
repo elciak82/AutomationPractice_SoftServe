@@ -2,8 +2,10 @@ package tests.userAuthentication;
 
 import helpers.Configuration;
 import helpers.Driver;
+import helpers.enums.PageTitleEnums;
 import helpers.models.Form;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -37,17 +39,31 @@ public class AccountCreationTests {
         authenticationPage.createAnAccountButtonClick();
 //        createAnAccountPage.submitAccountClick();
 
-        String FirstName = authenticationPage.generateRandomUserFirstName();
-        String LastName = authenticationPage.generateRandomUserLastName();
+        String firstName = authenticationPage.generateRandomUserFirstName();
+        String lastName = authenticationPage.generateRandomUserLastName();
+        String password = authenticationPage.generateRandomPassword();
+        String address = authenticationPage.generateRandomAddress();
+        String city = authenticationPage.generateRandomCity();
+        String zip = authenticationPage.generateRandomZip();
+        String mobilePhone = authenticationPage.generateRandomMobileNumber();
+        String addressAlias = authenticationPage.generateRandomAddressAlias();
 
         Form userForm = Form.builder()
-                .customerFirstName("FirstName")
-                .customerLastName("LastName")
-                .customerLastName("Pass")
+                .customerFirstName(firstName)
+                .customerLastName(lastName)
+                .customerPassword(password)
+                .customerAddress(address)
+                .customerCity(city)
+                .customerZip(zip)
+                .customerMobilePhone(mobilePhone)
+                .customerAddressAlias(addressAlias)
                 .build();
 
 //        System.out.println(userForm.builder().getCustomerFirstName());
         createAnAccountPage.createAnAccountRequired(userForm);
+
+        String title = authenticationPage.getPageTitle();
+        Assert.assertEquals(title, PageTitleEnums.TitlesEnums.MY_ACCOUNT_PAGE.getPageTitle());
 
     }
 

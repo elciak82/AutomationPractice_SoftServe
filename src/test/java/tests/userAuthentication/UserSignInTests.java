@@ -33,6 +33,7 @@ public class UserSignInTests {
 
         String email = Configuration.getConfiguration().getEmail();
         String password = Configuration.getConfiguration().getPassword();
+
         authenticationPage.inputEmailAddress(email);
         authenticationPage.inputPassword(password);
         authenticationPage.signInButtonClick();
