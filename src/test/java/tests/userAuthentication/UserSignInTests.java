@@ -62,7 +62,7 @@ public class UserSignInTests {
         header.clickSignInButton();
 
         String incorrectEmail = "invalid";
-        String password = customerFactory.generateRandomPassword();
+        String password = customerFactory.customerRandomPassword();
         authenticationPage.signIn(incorrectEmail, password);
 
         String error = authenticationPage.getAlertMessage();
@@ -73,7 +73,7 @@ public class UserSignInTests {
     public void incorrectSignIn_incorrectPassword() {
         header.clickSignInButton();
 
-        String email = customerFactory.generateRandomEmail();
+        String email = customerFactory.customerRandomEmail();
         String incorrectPassword = "pass";
         authenticationPage.signIn(email, incorrectPassword);
 
@@ -85,8 +85,8 @@ public class UserSignInTests {
     public void incorrectSignIn_incorrectEmailAddressAndPassword_authenticationFailed() {
         header.clickSignInButton();
 
-        String incorrectEmail = customerFactory.generateRandomEmail();
-        String incorrectPassword = customerFactory.generateRandomPassword();
+        String incorrectEmail = customerFactory.customerRandomEmail();
+        String incorrectPassword = customerFactory.customerRandomPassword();
         authenticationPage.signIn(incorrectEmail, incorrectPassword);
 
         String error = authenticationPage.getAlertMessage();
@@ -98,7 +98,7 @@ public class UserSignInTests {
         header.clickSignInButton();
 
         String email = "";
-        String password = customerFactory.generateRandomPassword();
+        String password = customerFactory.customerRandomPassword();
         authenticationPage.signIn(email, password);
 
         String error = authenticationPage.getAlertMessage();
@@ -121,7 +121,7 @@ public class UserSignInTests {
     public void incorrectSignIn_MissingPassword() {
         header.clickSignInButton();
 
-        String email = customerFactory.generateRandomEmail();
+        String email = customerFactory.customerRandomEmail();
         String password = "";
         authenticationPage.signIn(email, password);
 
@@ -147,7 +147,7 @@ public class UserSignInTests {
     public void forgotPassword_incorrectEmailAddress() {
         header.clickSignInButton();
 
-        String incorrectEmail = customerFactory.generateRandomEmail();
+        String incorrectEmail = customerFactory.customerRandomEmail();
         authenticationPage.forgotPasswordLinkClick();
         forgotPasswordPage.inputEmailAddress(incorrectEmail);
         forgotPasswordPage.retrievePasswordButtonClick();

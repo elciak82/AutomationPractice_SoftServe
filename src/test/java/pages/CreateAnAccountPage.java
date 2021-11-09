@@ -14,10 +14,10 @@ public class CreateAnAccountPage extends GenericPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(id = "uniform-id_gender1")
+    @FindBy(id = "id_gender1")
     WebElement genderMrRadio;
 
-    @FindBy(id = "uniform-id_gender2")
+    @FindBy(id = "id_gender2")
     WebElement genderMrsRadio;
 
     @FindBy(id = "customer_firstname")
@@ -65,9 +65,6 @@ public class CreateAnAccountPage extends GenericPage {
     @FindBy(id = "city")
     WebElement city;
 
-    @FindBy(id = "uniform-id_state")
-    WebElement getState;
-
     @FindBy(id = "id_state")
     WebElement state;
 
@@ -92,29 +89,80 @@ public class CreateAnAccountPage extends GenericPage {
     @FindBy(css = "[id = 'submitAccount']")
     WebElement submitAccount;
 
-    public void selectFromDropdown (WebElement webElement, StatesEnums.CustomerStateEnums customerState) {
+    @FindBy(className = "account")
+    WebElement customerName;
+
+    public void selectStateFromDropdown(WebElement webElement, StatesEnums.CustomerStateEnums customerState) {
         Select dropdown = new Select(webElement);
         dropdown.selectByValue(String.valueOf(customerState.getState()));
     }
 
-    public void createAnAccountRequired(Customer customer, StatesEnums.CustomerStateEnums stateEnum) {
+    public void selectRandomDateFromDropdown() {
+        Select dateDropdown = new Select(days);
+        dateDropdown.selectByValue("1");
+
+        Select monthDropdown = new Select(months);
+        monthDropdown.selectByValue("1");
+
+        Select yearDropdown = new Select(years);
+        yearDropdown.selectByValue("1991");
+    }
+
+    public void createAnAccountRequiredFields(Customer customer, StatesEnums.CustomerStateEnums stateEnum) {
         customerLastName.isDisplayed();
         customerFirstName.sendKeys(customer.getCustomerFirstName());
         customerLastName.sendKeys(customer.getCustomerLastName());
         password.sendKeys(customer.getCustomerPassword());
         addressLine1.sendKeys(customer.getCustomerAddress());
         city.sendKeys(customer.getCustomerCity());
-        selectFromDropdown(state, stateEnum);
+        selectStateFromDropdown(state, stateEnum);
         postcode.sendKeys(customer.getCustomerZip());
         mobilePhone.sendKeys(customer.getCustomerMobilePhonePhone());
         addressAlias.sendKeys(customer.getCustomerAddressAlias());
         submitAccount.click();
     }
 
+    public void createAnAccountAllFields(Customer customer, StatesEnums.CustomerStateEnums stateEnum, boolean gender) {
+        customerLastName.isDisplayed();
+
+        if (!gender) {
+            genderMrsRadio.click();
+        } else
+            genderMrRadio.click();
+
+        customerFirstName.sendKeys(customer.getCustomerFirstName());
+        customerLastName.sendKeys(customer.getCustomerLastName());
+        password.sendKeys(customer.getCustomerPassword());
+        selectRandomDateFromDropdown();
+        signUpForNewsletterCheckbox();
+        receiveSpecialOffersCheckbox();
+        addressLine1.sendKeys(customer.getCustomerAddress());
+        addressLine2.sendKeys(customer.getCustomerAddress2());
+        city.sendKeys(customer.getCustomerCity());
+        selectStateFromDropdown(state, stateEnum);
+        postcode.sendKeys(customer.getCustomerZip());
+        additionalInformation.sendKeys(customer.getCustomerAdditionalInfo());
+        company.sendKeys(customer.getCustomerCompany());
+        homePhone.sendKeys(customer.getCustomerHomePhone());
+        mobilePhone.sendKeys(customer.getCustomerMobilePhonePhone());
+        addressAlias.sendKeys(customer.getCustomerAddressAlias());
+        submitAccount.click();
+    }
+    public void signUpForNewsletterCheckbox(){
+        newsletterCheckbox.click();
+    }
+
+    public void receiveSpecialOffersCheckbox(){
+        specialOffersCheckbox.click();
+    }
+
     public void submitAccountClick(){
         submitAccount.click();
 }
 
+    public String getCustomerNameFromAccountPage(){
+        return customerName.getText();
+    }
 
 
 

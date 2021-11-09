@@ -30,63 +30,67 @@ public class CustomerFactory {
         return randomAlphaString(6);
     }
 
-    public String generateRandomEmail() {
+    public String customerRandomEmail() {
         return "email@" + suffix + ".com";
     }
 
-    public String generateRandomPassword() {
+    public String customerRandomPassword() {
         return "pass" + suffix;
     }
 
-    public String generateRandomUserFirstName() {
+    public String customerRandomFirstName() {
         return "FirstName" + suffix;
     }
 
-    public String generateRandomUserLastName() {
+    public String customerRandomLastName() {
         return "LastName" + suffix;
     }
 
-    public String generateRandomCompany() {
+    public String customerRandomCompany() {
         return "Company" + suffix;
     }
 
-    public String generateRandomAddress() {
+    public String customerRandomAddress() {
         return "Address" + suffix;
     }
 
-    public String generateRandomAddressLine2() {
+    public String customerRandomAddressLine2() {
         return "Address2" + suffix;
     }
 
-    public String generateRandomCity() {
+    public String customerRandomCity() {
         return "City" + suffix;
     }
 
-    public String generateRandomZip() {
+    public String customerRandomZip() {
         return "12345";
     }
 
-    public String generateRandomPhoneNumber() {
+    public String customerAdditionalInfo() {
+        return "Additional_info" + suffix;
+    }
+
+    public String customerRandomPhoneNumber() {
         return "123456789";
     }
 
-    public String generateRandomMobileNumber() {
+    public String customerRandomMobileNumber() {
         return "600600600";
     }
 
-    public String generateRandomAddressAlias() {
+    public String customerRandomAddressAlias() {
         return "Alias" + suffix;
     }
 
-    public Customer getCustomerToRegister_Required() {
-        String firstName = generateRandomUserFirstName();
-        String lastName = generateRandomUserLastName();
-        String password = generateRandomPassword();
-        String address = generateRandomAddress();
-        String city = generateRandomCity();
-        String zip = generateRandomZip();
-        String mobilePhone = generateRandomMobileNumber();
-        String addressAlias = generateRandomAddressAlias();
+    public Customer getCustomerToRegister_required() {
+        String firstName = customerRandomFirstName();
+        String lastName = customerRandomLastName();
+        String password = customerRandomPassword();
+        String address = customerRandomAddress();
+        String city = customerRandomCity();
+        String zip = customerRandomZip();
+        String mobilePhone = customerRandomMobileNumber();
+        String addressAlias = customerRandomAddressAlias();
 
         return Customer.builder()
                 .customerFirstName(firstName)
@@ -98,5 +102,39 @@ public class CustomerFactory {
                 .customerMobilePhone(mobilePhone)
                 .customerAddressAlias(addressAlias)
                 .build();
+    }
+
+    public Customer getCustomerToRegister_all() {
+        String firstName = customerRandomFirstName();
+        String lastName = customerRandomLastName();
+        String password = customerRandomPassword();
+        String company = customerRandomCompany();
+        String address = customerRandomAddress();
+        String addressLine2 = customerRandomAddressLine2();
+        String city = customerRandomCity();
+        String zip = customerRandomZip();
+        String additionalInfo = customerAdditionalInfo();
+        String phoneNumber = customerRandomPhoneNumber();
+        String mobilePhone = customerRandomMobileNumber();
+        String addressAlias = customerRandomAddressAlias();
+
+        return Customer.builder()
+                .customerFirstName(firstName)
+                .customerLastName(lastName)
+                .customerPassword(password)
+                .customerCompany(company)
+                .customerAddress(address)
+                .customerAddress2(addressLine2)
+                .customerCity(city)
+                .customerZip(zip)
+                .customerAdditionalInfo(additionalInfo)
+                .customerHomePhone(phoneNumber)
+                .customerMobilePhone(mobilePhone)
+                .customerAddressAlias(addressAlias)
+                .build();
+    }
+
+    public String getCustomerFirstNameLastName(){
+        return customerRandomFirstName() + " " + customerRandomLastName();
     }
 }

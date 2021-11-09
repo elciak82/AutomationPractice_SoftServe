@@ -4,7 +4,6 @@ import helpers.Configuration;
 import helpers.Driver;
 import helpers.enums.PageTitleEnums;
 import helpers.enums.StatesEnums;
-import helpers.models.Customer;
 import helpers.providers.CustomerFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -38,14 +37,31 @@ public class AccountCreationTests {
         header.clickSignInButton();
 
         CustomerFactory customerFactory = new CustomerFactory();
-        String email = customerFactory.generateRandomEmail();
+        String email = customerFactory.customerRandomEmail();
 
         authenticationPage.inputEmailAddressCreate(email); ////// HERE
         authenticationPage.createAnAccountButtonClick();
-        createAnAccountPage.createAnAccountRequired(customerFactory.getCustomerToRegister_Required(), StatesEnums.CustomerStateEnums.ALABAMA);
+        createAnAccountPage.createAnAccountRequiredFields(customerFactory.getCustomerToRegister_required(), StatesEnums.CustomerStateEnums.ALABAMA);
 
-        String title = authenticationPage.getPageTitle();
-        Assert.assertEquals(title, PageTitleEnums.TitlesEnums.MY_ACCOUNT_PAGE.getPageTitle());
+        String customerFirstNameLastName = createAnAccountPage.getCustomerNameFromAccountPage();
+        Assert.assertEquals(customerFirstNameLastName, customerFactory.getCustomerFirstNameLastName());
+
+    }
+
+    @Test
+    public void correctAccountCreation_allFields() {
+        header.clickSignInButton();
+
+        CustomerFactory customerFactory = new CustomerFactory();
+        String email = customerFactory.customerRandomEmail();
+
+        authenticationPage.inputEmailAddressCreate(email); ////// HERE
+        authenticationPage.createAnAccountButtonClick();
+
+        createAnAccountPage.createAnAccountAllFields(customerFactory.getCustomerToRegister_all(), StatesEnums.CustomerStateEnums.ALABAMA, false);
+
+        String customerFirstNameLastName = createAnAccountPage.getCustomerNameFromAccountPage();
+        Assert.assertEquals(customerFirstNameLastName, customerFactory.getCustomerFirstNameLastName());
 
     }
 
