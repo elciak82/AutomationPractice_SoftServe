@@ -28,6 +28,10 @@ public class Customer {
         return customerLastName;
     }
 
+    public void setCustomerLastName(String customerLastName) {
+        this.customerLastName = customerLastName;
+    }
+
     public String getCustomerPassword() {
         return customerPassword;
     }

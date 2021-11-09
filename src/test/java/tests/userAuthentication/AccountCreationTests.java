@@ -2,8 +2,10 @@ package tests.userAuthentication;
 
 import helpers.Configuration;
 import helpers.Driver;
+import helpers.enums.AlertEnums;
 import helpers.enums.PageTitleEnums;
 import helpers.enums.StatesEnums;
+import helpers.models.Customer;
 import helpers.providers.CustomerFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -62,6 +64,27 @@ public class AccountCreationTests {
 
         String customerFirstNameLastName = createAnAccountPage.getCustomerNameFromAccountPage();
         Assert.assertEquals(customerFirstNameLastName, customerFactory.getCustomerFirstNameLastName());
+
+    }
+
+    @Test
+    public void incorrectAccountCreation_formPage_missingRequiredField_lastname() {
+        header.clickSignInButton();
+
+        CustomerFactory customerFactory = new CustomerFactory();
+        String email = customerFactory.customerRandomEmail();
+
+        authenticationPage.inputEmailAddressCreate(email); ////// HERE
+        authenticationPage.createAnAccountButtonClick();
+
+        Customer customer = customerFactory.getCustomerToRegister_required();
+        customer.setCustomerLastName("");
+
+        createAnAccountPage.fillAllRequiredFieldsInCreateAnAccountForm(customer, StatesEnums.CustomerStateEnums.ALABAMA);
+        createAnAccountPage.submitAccountClick();
+
+        Assert.assertTrue(createAnAccountPage.alertIsVisible());
+        Assert.assertEquals(createAnAccountPage.getAlertText(), "There is 1 error\n" + "lastname is required.");
 
     }
 

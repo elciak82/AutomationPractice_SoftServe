@@ -92,6 +92,9 @@ public class CreateAnAccountPage extends GenericPage {
     @FindBy(className = "account")
     WebElement customerName;
 
+    @FindBy(css = "[class = 'alert alert-danger']")
+    WebElement alert;
+
     public void selectStateFromDropdown(WebElement webElement, StatesEnums.CustomerStateEnums customerState) {
         Select dropdown = new Select(webElement);
         dropdown.selectByValue(String.valueOf(customerState.getState()));
@@ -108,7 +111,7 @@ public class CreateAnAccountPage extends GenericPage {
         yearDropdown.selectByValue("1991");
     }
 
-    public void createAnAccountRequiredFields(Customer customer, StatesEnums.CustomerStateEnums stateEnum) {
+    public void fillAllRequiredFieldsInCreateAnAccountForm(Customer customer, StatesEnums.CustomerStateEnums stateEnum) {
         customerLastName.isDisplayed();
         customerFirstName.sendKeys(customer.getCustomerFirstName());
         customerLastName.sendKeys(customer.getCustomerLastName());
@@ -119,10 +122,15 @@ public class CreateAnAccountPage extends GenericPage {
         postcode.sendKeys(customer.getCustomerZip());
         mobilePhone.sendKeys(customer.getCustomerMobilePhonePhone());
         addressAlias.sendKeys(customer.getCustomerAddressAlias());
+    }
+
+    public void createAnAccountRequiredFields(Customer customer, StatesEnums.CustomerStateEnums stateEnum) {
+        fillAllRequiredFieldsInCreateAnAccountForm(customer, stateEnum);
         submitAccount.click();
     }
 
-    public void createAnAccountAllFields(Customer customer, StatesEnums.CustomerStateEnums stateEnum, boolean gender) {
+
+    public void fillAllFieldsInCreateAnAccountForm(Customer customer, StatesEnums.CustomerStateEnums stateEnum, boolean gender) {
         customerLastName.isDisplayed();
 
         if (!gender) {
@@ -146,33 +154,35 @@ public class CreateAnAccountPage extends GenericPage {
         homePhone.sendKeys(customer.getCustomerHomePhone());
         mobilePhone.sendKeys(customer.getCustomerMobilePhonePhone());
         addressAlias.sendKeys(customer.getCustomerAddressAlias());
+    }
+
+    public void createAnAccountAllFields(Customer customer, StatesEnums.CustomerStateEnums stateEnum, boolean gender) {
+        fillAllFieldsInCreateAnAccountForm(customer, stateEnum, gender);
         submitAccount.click();
     }
-    public void signUpForNewsletterCheckbox(){
+
+    public void signUpForNewsletterCheckbox() {
         newsletterCheckbox.click();
     }
 
-    public void receiveSpecialOffersCheckbox(){
+    public void receiveSpecialOffersCheckbox() {
         specialOffersCheckbox.click();
     }
 
-    public void submitAccountClick(){
+    public void submitAccountClick() {
         submitAccount.click();
-}
+    }
 
-    public String getCustomerNameFromAccountPage(){
+    public String getCustomerNameFromAccountPage() {
         return customerName.getText();
     }
 
+    public Boolean alertIsVisible() {
+        return alert.isDisplayed();
+    }
 
-
-
-
-
-
-
-
-
-
+    public String getAlertText() {
+        return alert.getText();
+    }
 
 }
