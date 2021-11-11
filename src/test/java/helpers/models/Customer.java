@@ -36,6 +36,10 @@ public class Customer {
         return customerPassword;
     }
 
+    public void setCustomerPassword(String customerPassword) {
+        this.customerPassword = customerPassword;
+    }
+
     public String getCustomerEmail() {
         return customerEmail;
     }
@@ -60,6 +64,10 @@ public class Customer {
         return customerZip;
     }
 
+    public void setCustomerZip(String customerZip) {
+        this.customerZip = customerZip;
+    }
+
     public String getCustomerAdditionalInfo() {
         return customerAdditionalInfo;
     }
@@ -70,6 +78,10 @@ public class Customer {
 
     public String getCustomerMobilePhonePhone() {
         return customerMobilePhone;
+    }
+
+    public void setMobilePhone(String customerMobilePhone) {
+        this.customerMobilePhone = customerMobilePhone;
     }
 
     public String getCustomerAddressAlias() {

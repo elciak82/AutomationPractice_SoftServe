@@ -35,6 +35,9 @@ public class AuthenticationPage extends GenericPage {
     @FindBy(css = "[id = 'submitAccount']")
     WebElement submitAccount;
 
+    @FindBy(css = "[id = 'create_account_error'] li")
+    WebElement createAnAccountError;
+
 
     public void inputEmailAddress(String email) {
         emailAddress.clear();
@@ -70,10 +73,23 @@ public class AuthenticationPage extends GenericPage {
         emailCreate.sendKeys(newEmail);
     }
 
-    public void createAnAccountButtonClick(){
+    public CreateAnAccountPage createAnAccount(){
         createAnAccountButton.click();
         fluentWaitForElementDisplayed(submitAccount);
+        return new CreateAnAccountPage(driver);
+    }
 
+    public void createAnAccountButtonClick(){
+        createAnAccountButton.click();
+    }
+
+    public Boolean alertIsVisible() {
+        fluentWaitForElementDisplayed(createAnAccountError);
+        return createAnAccountError.isDisplayed();
+    }
+
+    public String getAlertText() {
+        return createAnAccountError.getText();
     }
 
 }
