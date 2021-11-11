@@ -29,9 +29,6 @@ public class Header extends GenericPage {
     @FindBy(xpath = "//*[@id='block_top_menu']/ul/li[3]/a")
     WebElement tshirtTab;
 
-    @FindBy(id = "header_logo")
-    WebElement logo;
-
     public AuthenticationPage clickSignInButton() {
         signInButton.click();
         return new AuthenticationPage(driver);
@@ -59,11 +56,6 @@ public class Header extends GenericPage {
     public TshirtsPage clickTshirtTab(){
         tshirtTab.click();
         return new TshirtsPage();
-    }
-
-    public Header backToHomePage() {
-        logo.click();
-        return new Header(driver);
     }
 
     public boolean signOutButtonIsVisible() {
