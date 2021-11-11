@@ -38,7 +38,10 @@ public class GenericPage {
         String title = driver.getTitle();
         System.out.println("The page title is " + title);
         return title;
+    }
 
+    public void addToCart (WebElement webElement){
+        webElement.click();
     }
 
 }

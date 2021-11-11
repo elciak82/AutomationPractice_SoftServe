@@ -118,7 +118,7 @@ public class UserSignInTests {
     }
 
     @Test
-    public void incorrectSignIn_MissingPassword() {
+    public void incorrectSignIn_missingPassword() {
         header.clickSignInButton();
 
         String email = customerFactory.customerRandomEmail();

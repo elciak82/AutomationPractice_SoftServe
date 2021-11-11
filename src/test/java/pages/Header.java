@@ -50,12 +50,16 @@ public class Header extends GenericPage {
 
     public DressesPage clickDressesTab(){
         dressesTab.click();
-        return new DressesPage();
+        return new DressesPage(driver);
     }
 
     public TshirtsPage clickTshirtTab(){
         tshirtTab.click();
         return new TshirtsPage();
+    }
+
+    public boolean signOutButtonIsVisible() {
+        return signOutButton.isDisplayed();
     }
 
 }
