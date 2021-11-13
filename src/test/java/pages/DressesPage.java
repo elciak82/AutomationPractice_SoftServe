@@ -36,8 +36,8 @@ public class DressesPage extends GenericPage {
         continueButton.click();
     }
 
-    public ShoppingCartSummaryPage proceedToCheckout(){
+    public SummaryPage proceedToCheckoutOnDressesPage(){
         proceedToCheckoutButton.click();
-        return new ShoppingCartSummaryPage(driver);
+        return new SummaryPage(driver);
     }
 }
