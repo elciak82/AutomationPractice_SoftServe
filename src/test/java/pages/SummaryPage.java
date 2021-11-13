@@ -5,8 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class ShoppingCartSummaryPage extends GenericPage {
-    public ShoppingCartSummaryPage(WebDriver driver) {
+public class SummaryPage extends GenericPage {
+    public SummaryPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
@@ -14,7 +14,10 @@ public class ShoppingCartSummaryPage extends GenericPage {
     @FindBy(css = ".standard-checkout")
     WebElement proceedToCheckout;
 
-    public void proceedToCheckout(){
+    public AddressesPage proceedToCheckoutOnSummaryPage(){
         proceedToCheckout.click();
+        return new AddressesPage(driver);
     }
+
+
 }

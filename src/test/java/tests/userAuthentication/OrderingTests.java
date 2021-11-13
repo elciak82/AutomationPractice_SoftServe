@@ -2,22 +2,18 @@ package tests.userAuthentication;
 
 import helpers.Configuration;
 import helpers.Driver;
+import helpers.enums.AlertEnums;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.AuthenticationPage;
-import pages.CreateAnAccountPage;
-import pages.DressesPage;
-import pages.Header;
+import pages.*;
 
 public class OrderingTests {
 
     private WebDriver driver;
     private Header header;
-    private AuthenticationPage authenticationPage;
-    private Configuration configuration;
-    private CreateAnAccountPage createAnAccountPage;
 
     @BeforeMethod
     public void setUp() {
@@ -27,13 +23,15 @@ public class OrderingTests {
     }
 
     @Test
-    public void signIDuringOrdering() {
+    public void ordering_signIDuringOrdering() {
         header.clickDressesTab();
 
         DressesPage dressesPage = new DressesPage(driver);
         dressesPage.addDressToCart(0);
 
-        dressesPage.proceedToCheckout().proceedToCheckout();
+        dressesPage
+                .proceedToCheckoutOnDressesPage()
+                .proceedToCheckoutOnSummaryPage();
 
         AuthenticationPage authenticationPage = new AuthenticationPage(driver);
 
@@ -42,5 +40,32 @@ public class OrderingTests {
         authenticationPage.signIn(email, password);
 
         Assert.assertTrue(header.signOutButtonIsVisible());
+    }
+
+    @Test
+    public void orderingIncomplete_termsOfServiceMissing() {
+
+        String email = Configuration.getConfiguration().getEmail();
+        String password = Configuration.getConfiguration().getPassword();
+        header.clickSignInButton().signIn(email, password);
+        header.clickDressesTab();
+
+        DressesPage dressesPage = new DressesPage(driver);
+        dressesPage.addDressToCart(0);
+
+        dressesPage
+                .proceedToCheckoutOnDressesPage()
+                .proceedToCheckoutOnSummaryPage()
+                .proceedToCheckoutOnAddressesPage()
+                .proceedToCheckoutOnShippingPage();
+
+        ShippingPage shippingPage = new ShippingPage(driver);
+        Assert.assertTrue(shippingPage.errorIsVisible());
+        Assert.assertEquals(shippingPage.getErrorText(), AlertEnums.AlertMessageEnums.TERMS_OF_SERVICE_AGREE_ERROR.getAlertMessage());
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        driver.close();
     }
 }

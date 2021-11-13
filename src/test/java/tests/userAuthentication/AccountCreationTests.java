@@ -207,6 +207,7 @@ public class AccountCreationTests {
         Assert.assertTrue(createAnAccountPage.alertIsVisible());
         Assert.assertEquals(createAnAccountPage.getAlertText(), "There is 1 error\n" + "passwd is invalid.");
     }
+
     @AfterMethod
     public void tearDown() {
         driver.close();

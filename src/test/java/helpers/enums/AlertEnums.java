@@ -9,13 +9,16 @@ public class AlertEnums {
         PASSWORD_REQUIRED_ERROR("Password is required."),
         AUTHENTICATION_FAILED_ERROR("Authentication failed."),
         FORGOT_PASSWORD_CONFIRMATION("A confirmation email has been sent to your address: "),
-        NO_ACCOUNT_REGISTER_ERROR("There is no account registered for this email address.");
+        NO_ACCOUNT_REGISTER_ERROR("There is no account registered for this email address."),
+        TERMS_OF_SERVICE_AGREE_ERROR("You must agree to the terms of service before continuing."),
+        ORDER_IS_COMPLETE ("Your order on My Store is complete.");
 
         private final String alertMessage;
 
         AlertMessageEnums(String alertMessage) {
             this.alertMessage = alertMessage;
         }
+
         public String getAlertMessage() {
             return this.alertMessage;
         }
