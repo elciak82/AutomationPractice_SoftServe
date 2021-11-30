@@ -1,35 +1,16 @@
 package tests.pagesCheck;
 
-import helpers.Configuration;
-import helpers.Driver;
 import helpers.enums.PageTitleEnums;
-import pages.Header;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import tests.BaseTest;
 
-public class TshirtsPageTests {
-    private WebDriver driver;
-    private Header header;
-
-    @BeforeMethod
-    public void setUp() {
-        driver = Driver.initializeWebDriver();
-        driver.get(Configuration.getConfiguration().getSiteURL());
-        header = new Header(driver);
-    }
+public class TshirtsPageTests extends BaseTest {
 
     @Test
     public void verifyTshirtPageTitleTest() {
         header.clickTshirtTab();
         String title = header.getPageTitle();
         Assert.assertEquals(title, PageTitleEnums.TitlesEnums.TSHIRT_PAGE.getPageTitle());
-    }
-
-    @AfterMethod
-    public void tearDown() {
-        driver.quit();
     }
 }

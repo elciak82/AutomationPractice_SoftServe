@@ -6,7 +6,7 @@ public class CustomerFactory {
 
     private static final String NUMERIC_STRING = "1234567890";
     private static final String ALPHA_STRING = "abcdefghijklmnoprstuvwxyz";
-    private static final String suffix = generateSuffix();
+    private String suffix = generateSuffix();
 
     public String randomNumericString(int count) {
         StringBuilder builder = new StringBuilder();

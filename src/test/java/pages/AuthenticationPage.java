@@ -23,7 +23,7 @@ public class AuthenticationPage extends GenericPage {
     @FindBy(css = "[class = 'alert alert-danger'] li")
     WebElement alert;
 
-    @FindBy(id = "[title='Recover your forgotten password']")
+    @FindBy(css = "[title='Recover your forgotten password']")
     WebElement forgotPasswordLink;
 
     @FindBy(id = "email_create")
@@ -64,6 +64,7 @@ public class AuthenticationPage extends GenericPage {
     }
 
     public ForgotPasswordPage forgotPasswordLinkClick() {
+        fluentWaitForElementDisplayed(forgotPasswordLink);
         forgotPasswordLink.click();
         return new ForgotPasswordPage(driver); ////// HERE
     }

@@ -18,7 +18,6 @@ public class UserSignInTests {
     private AuthenticationPage authenticationPage;
     private Configuration configuration;
     private ForgotPasswordPage forgotPasswordPage;
-    private CustomerFactory customerFactory;
 
     @BeforeMethod
     public void setUp() {
@@ -61,6 +60,7 @@ public class UserSignInTests {
     public void incorrectSignIn_incorrectEmailAddress() {
         header.clickSignInButton();
 
+        CustomerFactory customerFactory = new CustomerFactory();
         String incorrectEmail = "invalid";
         String password = customerFactory.customerRandomPassword();
         authenticationPage.signIn(incorrectEmail, password);
@@ -73,6 +73,7 @@ public class UserSignInTests {
     public void incorrectSignIn_incorrectPassword() {
         header.clickSignInButton();
 
+        CustomerFactory customerFactory = new CustomerFactory();
         String email = customerFactory.customerRandomEmail();
         String incorrectPassword = "pass";
         authenticationPage.signIn(email, incorrectPassword);
@@ -85,6 +86,7 @@ public class UserSignInTests {
     public void incorrectSignIn_incorrectEmailAddressAndPassword_authenticationFailed() {
         header.clickSignInButton();
 
+        CustomerFactory customerFactory = new CustomerFactory();
         String incorrectEmail = customerFactory.customerRandomEmail();
         String incorrectPassword = customerFactory.customerRandomPassword();
         authenticationPage.signIn(incorrectEmail, incorrectPassword);
@@ -97,6 +99,7 @@ public class UserSignInTests {
     public void incorrectSignIn_missingEmailAddress() {
         header.clickSignInButton();
 
+        CustomerFactory customerFactory = new CustomerFactory();
         String email = "";
         String password = customerFactory.customerRandomPassword();
         authenticationPage.signIn(email, password);
@@ -121,6 +124,7 @@ public class UserSignInTests {
     public void incorrectSignIn_missingPassword() {
         header.clickSignInButton();
 
+        CustomerFactory customerFactory = new CustomerFactory();
         String email = customerFactory.customerRandomEmail();
         String password = "";
         authenticationPage.signIn(email, password);
@@ -147,6 +151,7 @@ public class UserSignInTests {
     public void forgotPassword_incorrectEmailAddress() {
         header.clickSignInButton();
 
+        CustomerFactory customerFactory = new CustomerFactory();
         String incorrectEmail = customerFactory.customerRandomEmail();
         authenticationPage.forgotPasswordLinkClick();
         forgotPasswordPage.inputEmailAddress(incorrectEmail);
