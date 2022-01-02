@@ -30,7 +30,7 @@ public class AuthenticationPage extends GenericPage {
     @FindBy(id = "email_create")
     WebElement emailCreate;
 
-    @FindBy (id = "SubmitCreate")
+    @FindBy(id = "SubmitCreate")
     WebElement createAnAccountButton;
 
     @FindBy(css = "[id = 'submitAccount']")
@@ -39,52 +39,57 @@ public class AuthenticationPage extends GenericPage {
     @FindBy(css = "[id = 'create_account_error'] li")
     WebElement createAnAccountError;
 
-    @Step("Sign in Step with email: {email}, for method: {method} step...")
+    @Step("Sign in Step with email: {0}, for method: {method} step...")
     public void inputEmailAddress(String email) {
         emailAddress.clear();
         emailAddress.sendKeys(email);
     }
 
-    @Step ("Sign in Step with password: {0}, for method: {method} step...")
+    @Step("Sign in Step with password: {0}, for method: {method} step...")
     public void inputPassword(String passwd) {
         password.clear();
         password.sendKeys(passwd);
     }
 
-    @Step ("Sign in button click Step...")
+    @Step("Sign in button click Step...")
     public void signInButtonClick() {
         signInButton.click();
     }
 
-    @Step ("Sign in Step with email: {0}, password: {1}, for method: {method} step...")
+    @Step("Sign in Step with email: {0}, password: {1}, for method: {method} step...")
     public void signIn(String email, String password) {
         inputEmailAddress(email);
         inputPassword(password);
         signInButtonClick();
     }
 
+
     public String getAlertMessage() {
         return alert.getText();
     }
 
+    @Step("Forgot password button click Step...")
     public ForgotPasswordPage forgotPasswordLinkClick() {
         fluentWaitForElementDisplayed(forgotPasswordLink);
         forgotPasswordLink.click();
-        return new ForgotPasswordPage(driver); ////// HERE
+        return new ForgotPasswordPage(driver);
     }
 
+    @Step("Input email address Step with email: {0}, for method: {method} step...")
     public void inputEmailAddressCreate(String newEmail) {
         emailCreate.clear();
         emailCreate.sendKeys(newEmail);
     }
 
-    public CreateAnAccountPage createAnAccount(){
+    @Step("Create an account Step...")
+    public CreateAnAccountPage createAnAccount() {
         createAnAccountButton.click();
         fluentWaitForElementDisplayed(submitAccount);
         return new CreateAnAccountPage(driver);
     }
 
-    public void createAnAccountButtonClick(){
+    @Step("Create an account Step...")
+    public void createAnAccountButtonClick() {
         createAnAccountButton.click();
     }
 

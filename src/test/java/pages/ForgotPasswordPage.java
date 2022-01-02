@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -24,11 +25,13 @@ public class ForgotPasswordPage extends GenericPage {
     WebElement error;
 
 
+    @Step("Input email address Step...")
     public void inputEmailAddress(String email) {
         emailAddress.clear();
         emailAddress.sendKeys(email);
     }
 
+    @Step("Retrieve password button click Step...")
     public void retrievePasswordButtonClick() {
         retrievePasswordButton.click();
     }

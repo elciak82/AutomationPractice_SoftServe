@@ -13,8 +13,9 @@ import org.testng.annotations.Test;
 import pages.AuthenticationPage;
 import pages.CreateAnAccountPage;
 import pages.Header;
+import tests.BaseTest;
 
-public class AccountCreationTests {
+public class AccountCreationTests extends BaseTest {
 
     private WebDriver driver;
     private Header header;
@@ -27,8 +28,8 @@ public class AccountCreationTests {
         driver = Driver.initializeWebDriver();
         driver.get(Configuration.getConfiguration().getSiteURL());
         header = new Header(driver);
-        authenticationPage = new AuthenticationPage(driver); ////// HERE
-        createAnAccountPage = new CreateAnAccountPage(driver); ////// HERE
+        AuthenticationPage authenticationPage = new AuthenticationPage(driver); ////// HERE
+        CreateAnAccountPage createAnAccountPage = new CreateAnAccountPage(driver); ////// HERE
     }
 
     @Test
