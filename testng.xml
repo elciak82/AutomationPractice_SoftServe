@@ -6,7 +6,7 @@
 <!--            <package name="tests.userAuthentication"/>-->
 <!--        </packages>-->
         <classes>
-            <class name="tests.userAuthentication.UserSignInTests"></class>
+            <class name="tests.userAuthentication.UserSignInTests"/>
         </classes>
     </test>
 </suite>

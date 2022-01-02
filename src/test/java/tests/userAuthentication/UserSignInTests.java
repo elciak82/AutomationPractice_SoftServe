@@ -10,9 +10,9 @@ import org.testng.annotations.*;
 import pages.AuthenticationPage;
 import pages.ForgotPasswordPage;
 import tests.BaseTest;
-import utils.listeners.TestListener;
+//import utils.listeners.TestListener;
 
-@Listeners({TestListener.class})
+//@Listeners({TestListener.class})
 @Epic("Regression Tests")
 @Feature("User Sign In Tests")
 public class UserSignInTests extends BaseTest {
