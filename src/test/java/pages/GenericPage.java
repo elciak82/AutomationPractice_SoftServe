@@ -35,7 +35,7 @@ public class GenericPage {
         }
     }
 
-    @Step ("Get page title Step...")
+//    @Step ("Get page title Step...")
     public String getPageTitle() {
         String title = driver.getTitle();
         System.out.println("The page title is " + title);
