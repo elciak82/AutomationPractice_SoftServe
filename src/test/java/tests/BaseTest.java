@@ -14,7 +14,6 @@ import java.util.logging.Logger;
 public class BaseTest {
     public WebDriver driver;
     public Header header;
-
     public WebDriver getDriver() {
         return driver;
     }
