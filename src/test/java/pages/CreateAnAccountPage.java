@@ -2,6 +2,7 @@ package pages;
 
 import helpers.enums.StatesEnums;
 import helpers.models.Customer;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -110,7 +111,7 @@ public class CreateAnAccountPage extends GenericPage {
         Select yearDropdown = new Select(years);
         yearDropdown.selectByValue("1991");
     }
-
+    @Step("Create an account Step with required fields: {method}")
     public void fillAllRequiredFieldsInCreateAnAccountForm(Customer customer, StatesEnums.CustomerStateEnums stateEnum) {
         customerLastName.isDisplayed();
         customerFirstName.sendKeys(customer.getCustomerFirstName());
@@ -124,6 +125,7 @@ public class CreateAnAccountPage extends GenericPage {
         addressAlias.sendKeys(customer.getCustomerAddressAlias());
     }
 
+    @Step("Create an account Step with required fields: {method}")
     public void createAnAccountRequiredFields(Customer customer, StatesEnums.CustomerStateEnums stateEnum) {
         fillAllRequiredFieldsInCreateAnAccountForm(customer, stateEnum);
         submitAccount.click();
@@ -156,6 +158,7 @@ public class CreateAnAccountPage extends GenericPage {
         addressAlias.sendKeys(customer.getCustomerAddressAlias());
     }
 
+    @Step("Create an account Step with all fields: {method}")
     public void createAnAccountAllFields(Customer customer, StatesEnums.CustomerStateEnums stateEnum, boolean gender) {
         fillAllFieldsInCreateAnAccountForm(customer, stateEnum, gender);
         submitAccount.click();
@@ -169,6 +172,7 @@ public class CreateAnAccountPage extends GenericPage {
         specialOffersCheckbox.click();
     }
 
+    @Step("Submit account Step...")
     public void submitAccountClick() {
         submitAccount.click();
     }
