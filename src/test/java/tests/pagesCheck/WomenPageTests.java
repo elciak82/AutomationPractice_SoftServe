@@ -10,9 +10,9 @@ import tests.BaseTest;
 
 public class WomenPageTests extends BaseTest {
 
-    @Test (priority = 0, description = "Verify Women Page Title")
+    @Test (priority = 2, description = "Verify Women Page Title")
     @Description ("Test Description: Verify Women Page Title")
-    @Severity(SeverityLevel.TRIVIAL)
+    @Severity(SeverityLevel.MINOR)
     public void verifyWomenPageTitleTest() {
         header.clickWomenTab();
         String title = header.getPageTitle();

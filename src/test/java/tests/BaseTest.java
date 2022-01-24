@@ -1,15 +1,12 @@
 package tests;
 
-import com.aventstack.extentreports.model.Log;
 import helpers.Configuration;
 import helpers.Driver;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import pages.Header;
 
-import java.util.logging.Logger;
 
 public class BaseTest {
     public WebDriver driver;

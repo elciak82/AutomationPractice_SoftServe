@@ -12,6 +12,7 @@ import tests.BaseTest;
 
 @Epic("Regression Tests")
 @Feature("Create an account Tests")
+
 public class AccountCreationTests extends BaseTest {
 
     @Test(priority = 4, description = "Correct account creation - only required fields")

@@ -3,6 +3,10 @@ package tests.userAuthentication;
 import helpers.Configuration;
 import helpers.Driver;
 import helpers.enums.AlertEnums;
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -27,7 +31,10 @@ public class OrderingPaymentMethodsTests {
         header.backToHomePage();
     }
 
-    @Test
+    @Test(priority = 1, description = "Ordering completed - Pay by bank wire method")
+    @Severity(SeverityLevel.TRIVIAL)
+    @Description("Test Description: Ordering completed - Pay by bank wire method")
+    @Story("Ordering")
     public void orderingCompleted_payByBankWireMethod() {
         header.clickDressesTab();
 
@@ -48,7 +55,9 @@ public class OrderingPaymentMethodsTests {
         Assert.assertEquals(orderConfirmationPage.getOrderCompleteText(), AlertEnums.AlertMessageEnums.ORDER_IS_COMPLETE.getAlertMessage());
     }
 
-    @Test
+    @Test(priority = 1, description = "Ordering completed - Pay by check method")
+    @Description("Test Description: Ordering completed - Pay by check method")
+    @Story("Ordering")
     public void orderingCompleted_payByCheckMethod() {
         header.clickDressesTab();
 

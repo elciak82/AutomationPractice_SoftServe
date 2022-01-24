@@ -3,6 +3,10 @@ package tests.userAuthentication;
 import helpers.Configuration;
 import helpers.Driver;
 import helpers.enums.AlertEnums;
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -22,8 +26,11 @@ public class OrderingTests {
         header = new Header(driver);
     }
 
-    @Test
-    public void ordering_signIDuringOrdering() {
+    @Test(priority = 1, description = "Ordering - Sign in during ordering")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Test Description: Ordering - Sign in during ordering")
+    @Story("Ordering")
+    public void ordering_signInDuringOrdering() {
         header.clickDressesTab();
 
         DressesPage dressesPage = new DressesPage(driver);
@@ -42,7 +49,10 @@ public class OrderingTests {
         Assert.assertTrue(header.signOutButtonIsVisible());
     }
 
-    @Test
+    @Test(priority = 1, description = "Ordering incomplete - Terms of service missing")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Test Description: Ordering incomplete - Terms of service missing")
+    @Story("Ordering")
     public void orderingIncomplete_termsOfServiceMissing() {
 
         String email = Configuration.getConfiguration().getEmail();
